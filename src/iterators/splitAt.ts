@@ -1,11 +1,14 @@
 import GenericIterable from '../GenericIterable';
 
-class SplitAtIterable<T> extends GenericIterable<T> {
-  constructor(private index: number, private iterable?: Iterable<any>) {
+class SplitAtIterable<T> extends GenericIterable<T[]> {
+  constructor(
+    private index: number,
+    private iterable?: Iterable<T>
+  ) {
     super();
   }
 
-  *[Symbol.iterator](): Iterator<any> {
+  *[Symbol.iterator](): Iterator<T[]> {
     let result = [];
     let n = 0;
 
@@ -25,7 +28,10 @@ class SplitAtIterable<T> extends GenericIterable<T> {
   }
 }
 
-function splitAt<T>(index: number, iterable: Iterable<T> = this): Iterable<T> {
+function splitAt<T>(
+  index: number,
+  iterable: Iterable<T> = this
+): GenericIterable<T[]> {
   return new SplitAtIterable<T>(index, iterable);
 }
 

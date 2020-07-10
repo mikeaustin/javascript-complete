@@ -20,13 +20,11 @@ class RangeIterable<T extends Ordered<T>> extends GenericIterable<T>  {
   }
 }
 
-function range<T extends Ordered<T>>(from: T, to: T) {
-  const iterator = new RangeIterable(from, to);
-
-  iterator.from = from;
-  iterator.to = to;
-
-  return iterator;
+function range<T extends Ordered<T>>(
+  from: T,
+  to: T
+): GenericIterable<T> {
+  return new RangeIterable(from, to);
 };
 
 export default range;

@@ -1,24 +1,37 @@
 import GenericIterable from '../GenericIterable';
 
-class MapIterable<T> extends GenericIterable<T> {
-  constructor(private mapper: (value: T) => any, private iterable: Iterable<T>) {
+class MapIterable<T, R> extends GenericIterable<R> {
+  constructor(
+    private mapper: (value: T) => R,
+    private iterable: Iterable<T>
+  ) {
     super();
   }
 
-  *[Symbol.iterator](): Iterator<any> {
+  *[Symbol.iterator](): Iterator<R> {
     for (let value of this.iterable) {
       yield this.mapper(value);
     }
   }
 }
 
-function map<T, R>(mapper: (value: T) => R): (iterator: Iterable<T>) => Iterable<T>;
-function map<T, R>(mapper: (value: T) => R, iterable: Iterable<T>): Iterable<T>;
-function map<T, R>(mapper: (value: T) => R, iterable: Iterable<T> | void = this): Iterable<T> | ((iterator: Iterable<T>) => Iterable<T>) {
+function map<T, R>(
+  mapper: (value: T) => R
+): (iterator: Iterable<T>) => GenericIterable<R>;
+
+function map<T, R>(
+  mapper: (value: T) => R,
+  iterable: Iterable<T>
+): GenericIterable<R>;
+
+function map<T, R>(
+  mapper: (value: T) => R,
+  iterable: Iterable<T> | void = this
+): GenericIterable<R> | ((iterator: Iterable<T>) => GenericIterable<R>) {
   if (iterable) {
-    return new MapIterable<T>(mapper, iterable);
+    return new MapIterable<T, R>(mapper, iterable);
   } else {
-    return (iterable: Iterable<T>) => new MapIterable<T>(mapper, iterable);
+    return (iterable: Iterable<T>) => new MapIterable<T, R>(mapper, iterable);
   }
 }
 

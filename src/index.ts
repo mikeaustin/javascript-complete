@@ -1,13 +1,11 @@
 import GenericIterable from './GenericIterable';
 
-import { identity } from './standard';
+import { identity, even } from './standard';
 import range from './generators/range';
 import map from './iterators/map';
 import zip from './iterators/zip';
 import splitAt from './iterators/splitAt';
-import groupBy from './iterators/groupBy';
-
-const even = (n: number) => n % 2 === 0;
+import groupBy, { Group } from './iterators/groupBy';
 
 declare global {
   interface Number {
@@ -19,21 +17,19 @@ declare global {
   }
 
   interface Array<T> {
-    zip<T, S, R>(zipper?: (x: any[]) => R, iterables?: Iterable<R>[]): Iterable<R>;
-    groupBy<R>(grouper: (x: T) => string, iterable?: Iterable<T>): Iterable<T>;
+    zip(zipper?: (values: any[]) => any, iterables?: Iterable<any>[]): GenericIterable<any>;
+    groupBy(grouper: (x: T) => string, iterable?: Iterable<T>): GenericIterable<Group<T>>;
+  }
+
+  interface Map<K, V> {
+    map<R>(mapper: (value: [K, V]) => R, iterable?: Iterable<V>): GenericIterable<R>;
   }
 }
 
-// declare global {
-//   interface IterableIterator<T> {
-//     map<R>(f: (x: T) => R, iterable?: Iterable<R>): Iterable<R>;
-//     groupBy<R>(grouper: (x: T) => string, iterable?: Iterable<T>): Iterable<T>;
-//   }
-// }
-
 declare global {
   interface Iterable<T> {
-    groupBy<R>(grouper: (x: T) => string, iterable?: Iterable<T>): Iterable<T>;
+    // map<R>(mapper: (value: T) => R, iterable?: Iterable<T>): Iterable<R>;
+    // groupBy(grouper: (x: T) => string, iterable?: Iterable<T>): Iterable<Group<T>>;
   }
 }
 
@@ -47,10 +43,10 @@ String.prototype.succ = function () {
 
 declare module "./GenericIterable" {
   interface GenericIterable<T> {
-    map<R>(mapper: (value: T) => R, iterable?: Iterable<T>): Iterable<T>;
-    zip<R>(zipper?: (values: any[]) => any, iterables?: Iterable<R>[]): Iterable<R>;
-    splitAt<R>(index: number, iterable?: Iterable<R>): Iterable<R>;
-    groupBy<R>(grouper: (x: T) => string, iterable?: Iterable<T>): Iterable<T>;
+    map<R>(mapper: (value: T) => R, iterable?: Iterable<T>): GenericIterable<R>;
+    zip(zipper?: (values: any[]) => any, iterables?: Iterable<any>[]): GenericIterable<any>;
+    splitAt(index: number, iterable?: Iterable<T>): GenericIterable<T[]>;
+    groupBy(grouper: (x: T) => string, iterable?: Iterable<T>): GenericIterable<Group<T>>;
   }
 }
 
@@ -60,6 +56,7 @@ GenericIterable.prototype.splitAt = splitAt;
 GenericIterable.prototype.groupBy = groupBy;
 Array.prototype.zip = zip;
 Array.prototype.groupBy = groupBy;
+Map.prototype.map = map;
 
 // console.log(Object.getPrototypeOf(function* () { }).constructor);
 // console.log('>>>', [1, 2, 3].entries().constructor.prototype);
@@ -69,7 +66,7 @@ Array.prototype.groupBy = groupBy;
 console.log(identity('hello'));
 
 console.log(Array.from(
-  range(1, 5).map((x: number) => x * x)
+  range(-3, 3).map((x: number) => x.toString())
 ));
 
 console.log(Array.from(
@@ -80,16 +77,32 @@ console.log(Array.from(
   range(1, 5).splitAt(2)
 ));
 
-console.log(Array.from(
+console.log(
   range(1, 5).groupBy(n => even(n) ? 'even' : 'odd')
+);
+
+console.log(Array.from(
+  [range(1, 5), range('a', 'z')].zip(([n, c]) => [n * n, c])
+    .groupBy(([n, c]) => even(n) ? 'even' : 'odd')
+    .map(([n, c]) => [n, c.toString()])
 ));
 
 console.log(Array.from(
-  [range(1, 5), range('a', 'z')].zip(([n, c]) => [n, c])
+  [range(1, 5), range('a', 'z')].zip()
+    .map(([n, c]) => [n * n, c])
     .groupBy(([n, c]) => even(n) ? 'even' : 'odd')
-  // .map([n, c] => n)
+    .map(([n, c]) => [n, c.toString()])
 ));
 
 console.log(Array.from(
   map((x: number) => x * x)([1, 2, 3])
+));
+
+console.log(Array.from(
+  map((x: number) => x * x, [1, 2, 3])
+));
+
+console.log(Array.from(
+  new Map([['one', 1], ['two', 2]])
+    .map(([key, value]) => `${key}: ${value}`)
 ));
