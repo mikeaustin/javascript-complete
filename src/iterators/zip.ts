@@ -1,6 +1,6 @@
 import GenericIterable from '../GenericIterable';
 
-class ZipIterator<T, R> extends GenericIterable<T, R> {
+class ZipIterable<T> extends GenericIterable<T> {
   constructor(private zipper: (values: any[]) => any, private iterables: Iterable<any>[]) {
     super();
   }
@@ -20,7 +20,7 @@ class ZipIterator<T, R> extends GenericIterable<T, R> {
 const items = ([...values]: any[]): any => [...values];
 
 function zip<T, R>(zipper: (values: any[]) => R = items, iterables: Iterable<any>[] = this) {
-  return new ZipIterator<T, R>(zipper, iterables);
+  return new ZipIterable<T>(zipper, iterables);
 };
 
 export default zip;

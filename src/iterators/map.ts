@@ -1,6 +1,6 @@
 import GenericIterable from '../GenericIterable';
 
-class MapIterator<T, R> extends GenericIterable<T, R> {
+class MapIterable<T> extends GenericIterable<T> {
   constructor(private mapper: (value: T) => any, private iterable: Iterable<T>) {
     super();
   }
@@ -16,9 +16,9 @@ function map<T, R>(mapper: (value: T) => R): (iterator: Iterable<T>) => Iterable
 function map<T, R>(mapper: (value: T) => R, iterable: Iterable<T>): Iterable<T>;
 function map<T, R>(mapper: (value: T) => R, iterable: Iterable<T> | void = this): Iterable<T> | ((iterator: Iterable<T>) => Iterable<T>) {
   if (iterable) {
-    return new MapIterator<T, R>(mapper, iterable);
+    return new MapIterable<T>(mapper, iterable);
   } else {
-    return (iterable: Iterable<T>) => new MapIterator<T, R>(mapper, iterable);
+    return (iterable: Iterable<T>) => new MapIterable<T>(mapper, iterable);
   }
 }
 

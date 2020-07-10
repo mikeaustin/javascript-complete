@@ -1,6 +1,6 @@
 import GenericIterable, { Ordered } from '../GenericIterable';
 
-class RangeIterator<T extends Ordered<T>> extends GenericIterable<T, T>  {
+class RangeIterable<T extends Ordered<T>> extends GenericIterable<T>  {
   constructor(public from: T, public to: T) {
     super();
   }
@@ -21,7 +21,7 @@ class RangeIterator<T extends Ordered<T>> extends GenericIterable<T, T>  {
 }
 
 function range<T extends Ordered<T>>(from: T, to: T) {
-  const iterator = new RangeIterator(from, to);
+  const iterator = new RangeIterable(from, to);
 
   iterator.from = from;
   iterator.to = to;

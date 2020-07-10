@@ -46,8 +46,8 @@ String.prototype.succ = function () {
 };
 
 declare module "./GenericIterable" {
-  interface GenericIterable<T, R> {
-    map<T, R>(mapper: (value: T) => R, iterable?: Iterable<T>): Iterable<T>;
+  interface GenericIterable<T> {
+    map<R>(mapper: (value: T) => R, iterable?: Iterable<T>): Iterable<T>;
     zip<R>(zipper?: (values: any[]) => any, iterables?: Iterable<R>[]): Iterable<R>;
     splitAt<R>(index: number, iterable?: Iterable<R>): Iterable<R>;
     groupBy<R>(grouper: (x: T) => string, iterable?: Iterable<T>): Iterable<T>;

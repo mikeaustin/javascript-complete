@@ -1,6 +1,6 @@
 import GenericIterable from '../GenericIterable';
 
-class SplitAtIterator<T> extends GenericIterable<T, T[]> {
+class SplitAtIterable<T> extends GenericIterable<T> {
   constructor(private index: number, private iterable?: Iterable<any>) {
     super();
   }
@@ -26,7 +26,7 @@ class SplitAtIterator<T> extends GenericIterable<T, T[]> {
 }
 
 function splitAt<T>(index: number, iterable: Iterable<T> = this): Iterable<T> {
-  return new SplitAtIterator<T>(index, iterable);
+  return new SplitAtIterable<T>(index, iterable);
 }
 
 export default splitAt;

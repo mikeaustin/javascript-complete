@@ -1,6 +1,6 @@
 import GenericIterable from '../GenericIterable';
 
-class GroupByIterator<T, R> extends GenericIterable<T, R> {
+class GroupByIterable<T> extends GenericIterable<T> {
   constructor(private grouper: (x: T) => string, private iterable: Iterable<T>) {
     super();
   }
@@ -25,7 +25,7 @@ class GroupByIterator<T, R> extends GenericIterable<T, R> {
 }
 
 function groupBy<T, R>(grouper: (x: T) => string, iterable: Iterable<T> = this): Iterable<T> {
-  return new GroupByIterator<T, R>(grouper, iterable);
+  return new GroupByIterable<T>(grouper, iterable);
 }
 
 export default groupBy;
