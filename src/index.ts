@@ -20,12 +20,20 @@ declare global {
 
   interface Array<T> {
     zip<T, S, R>(zipper?: (x: any[]) => R, iterables?: Iterable<R>[]): Iterable<R>;
+    groupBy<R>(grouper: (x: T) => string, iterable?: Iterable<T>): Iterable<T>;
   }
 }
 
+// declare global {
+//   interface IterableIterator<T> {
+//     map<R>(f: (x: T) => R, iterable?: Iterable<R>): Iterable<R>;
+//     groupBy<R>(grouper: (x: T) => string, iterable?: Iterable<T>): Iterable<T>;
+//   }
+// }
+
 declare global {
-  interface IterableIterator<T> {
-    map<R>(f: (x: T) => R, iterable?: Iterable<R>): Iterable<R>;
+  interface Iterable<T> {
+    groupBy<R>(grouper: (x: T) => string, iterable?: Iterable<T>): Iterable<T>;
   }
 }
 
@@ -51,15 +59,12 @@ GenericIterable.prototype.zip = zip;
 GenericIterable.prototype.splitAt = splitAt;
 GenericIterable.prototype.groupBy = groupBy;
 Array.prototype.zip = zip;
+Array.prototype.groupBy = groupBy;
 
 // console.log(Object.getPrototypeOf(function* () { }).constructor);
 // console.log('>>>', [1, 2, 3].entries().constructor.prototype);
 
 // Object.getPrototypeOf(function* () { }).constructor.prototype.map = map;
-
-// [1, 2, 3].values().constructor.prototype.map = map;
-// console.log([1, 2, 3].values());
-// console.log(Object.prototype);
 
 console.log(identity('hello'));
 
@@ -80,24 +85,11 @@ console.log(Array.from(
 ));
 
 console.log(Array.from(
-  map((x: number) => x * x)([1, 2, 3])
+  [range(1, 5), range('a', 'z')].zip(([n, c]) => [n, c])
+    .groupBy(([n, c]) => even(n) ? 'even' : 'odd')
+  // .map([n, c] => n)
 ));
 
-
-// const map2 = function <T, R = T>(f: (value: T) => R, iterable = this): Iterator<T> {
-//   const inner = function* () {
-//     for (let value of iterable) {
-//       yield f(value);
-//     }
-//   };
-
-//   if (iterable) {
-//     return inner();
-//   } else {
-//     return inner;
-//   }
-// };
-
-// console.log(Array.from(
-//   map2((x: number) => x * x)([1, 2, 3])
-// ));
+console.log(Array.from(
+  map((x: number) => x * x)([1, 2, 3])
+));
