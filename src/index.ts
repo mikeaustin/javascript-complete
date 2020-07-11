@@ -77,21 +77,14 @@ console.log(Array.from(
   range(1, 5).splitAt(2)
 ));
 
-console.log(
+console.log(Array.from(
   range(1, 5).groupBy(n => even(n) ? 'even' : 'odd')
-);
+));
 
 console.log(Array.from(
   [range(1, 5), range('a', 'z')].zip(([n, c]) => [n * n, c])
     .groupBy(([n, c]) => even(n) ? 'even' : 'odd')
-    .map(([n, c]) => [n, c.toString()])
-));
-
-console.log(Array.from(
-  [range(1, 5), range('a', 'z')].zip()
-    .map(([n, c]) => [n * n, c])
-    .groupBy(([n, c]) => even(n) ? 'even' : 'odd')
-    .map(([n, c]) => [n, c.toString()])
+    .map(([k, v]) => [k, v.toString()])
 ));
 
 console.log(Array.from(

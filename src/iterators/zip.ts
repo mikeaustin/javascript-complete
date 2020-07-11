@@ -1,16 +1,16 @@
 import GenericIterable from '../GenericIterable';
 import { identity } from '../standard'
 
-class ZipIterable<T> extends GenericIterable<any> {
+class ZipIterable<T> extends GenericIterable<unknown> {
   constructor(
-    private zipper: (values: any[]) => any,
-    private iterables: Iterable<any>[]
+    private zipper: (values: unknown[]) => unknown,
+    private iterables: Iterable<unknown>[]
   ) {
     super();
   }
 
-  *[Symbol.iterator](): Iterator<T> {
-    let iterators = this.iterables.map((iterable: Iterable<any>) => iterable[Symbol.iterator]());
+  *[Symbol.iterator](): Iterator<unknown> {
+    let iterators = this.iterables.map((iterable: Iterable<unknown>) => iterable[Symbol.iterator]());
     let results = iterators.map(iterator => iterator.next());
 
     while (results.every(result => !result.done)) {
@@ -24,9 +24,9 @@ class ZipIterable<T> extends GenericIterable<any> {
 // const items = ([...values]: any[]): any => [...values];
 
 function zip<T, R>(
-  zipper: (values: any[]) => any = identity,
-  iterables: Iterable<any>[] = this
-): GenericIterable<any> {
+  zipper: (values: unknown[]) => unknown = identity,
+  iterables: Iterable<unknown>[] = this
+): GenericIterable<unknown> {
   return new ZipIterable<T>(zipper, iterables);
 };
 
