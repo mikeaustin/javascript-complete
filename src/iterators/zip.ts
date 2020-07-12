@@ -21,8 +21,6 @@ class ZipIterable<T> extends GenericIterable<unknown> {
   }
 }
 
-// const items = ([...values]: any[]): any => [...values];
-
 function zip<T, R>(
   zipper: (values: unknown[]) => unknown = identity,
   iterables: Iterable<unknown>[] = this

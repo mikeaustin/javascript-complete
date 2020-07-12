@@ -5,6 +5,8 @@ import range from './generators/range';
 import map from './iterators/map';
 import zip from './iterators/zip';
 import splitAt from './iterators/splitAt';
+import splitBy from './iterators/splitBy';
+import splitEvery from './iterators/splitEvery';
 import groupBy, { Group } from './iterators/groupBy';
 
 declare global {
@@ -19,6 +21,7 @@ declare global {
   interface Array<T> {
     zip(zipper?: (values: any[]) => any, iterables?: Iterable<any>[]): GenericIterable<any>;
     groupBy(grouper: (x: T) => string, iterable?: Iterable<T>): GenericIterable<Group<T>>;
+    splitBy(splitter: (a: T, b: T) => boolean, iterable?: Iterable<T>): GenericIterable<T[]>;
   }
 
   interface Map<K, V> {
@@ -46,6 +49,8 @@ declare module "./GenericIterable" {
     map<R>(mapper: (value: T) => R, iterable?: Iterable<T>): GenericIterable<R>;
     zip(zipper?: (values: any[]) => any, iterables?: Iterable<any>[]): GenericIterable<any>;
     splitAt(index: number, iterable?: Iterable<T>): GenericIterable<T[]>;
+    splitBy(splitter: (a: T, b: T) => boolean, iterable?: Iterable<T>): GenericIterable<T[]>;
+    splitEvery(count: number, iterable?: Iterable<T>): GenericIterable<T[]>;
     groupBy(grouper: (x: T) => string, iterable?: Iterable<T>): GenericIterable<Group<T>>;
   }
 }
@@ -53,7 +58,10 @@ declare module "./GenericIterable" {
 GenericIterable.prototype.map = map;
 GenericIterable.prototype.zip = zip;
 GenericIterable.prototype.splitAt = splitAt;
+GenericIterable.prototype.splitBy = splitBy;
+GenericIterable.prototype.splitEvery = splitEvery;
 GenericIterable.prototype.groupBy = groupBy;
+
 Array.prototype.zip = zip;
 Array.prototype.groupBy = groupBy;
 Map.prototype.map = map;
@@ -75,6 +83,10 @@ console.log(Array.from(
 
 console.log(Array.from(
   range(1, 5).splitAt(2)
+));
+
+console.log(Array.from(
+  range(1, 5).splitEvery(2)
 ));
 
 console.log(Array.from(

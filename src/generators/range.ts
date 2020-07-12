@@ -1,6 +1,6 @@
-import GenericIterable, { Ordered } from '../GenericIterable';
+import GenericIterable, { Enumerabe } from '../GenericIterable';
 
-class RangeIterable<T extends Ordered<T>> extends GenericIterable<T>  {
+class RangeIterable<T extends Enumerabe<T>> extends GenericIterable<T>  {
   constructor(public from: T, public to: T) {
     super();
   }
@@ -20,7 +20,7 @@ class RangeIterable<T extends Ordered<T>> extends GenericIterable<T>  {
   }
 }
 
-function range<T extends Ordered<T>>(
+function range<T extends Enumerabe<T>>(
   from: T,
   to: T
 ): GenericIterable<T> {

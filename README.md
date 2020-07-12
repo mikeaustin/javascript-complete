@@ -42,7 +42,7 @@ Creates a function that simply returns its paramets.
 
 Creates an iterable that generates Orderable values from 'from' to 'to'.
 
-    range<T extends Ordered<T>(                   range(1, 10), range('a', 'z')
+    range<T extends Enumerabe<T>(                 range(1, 10), range('a', 'z')
       from: number,
       to: number
     ): Iterable<T>
