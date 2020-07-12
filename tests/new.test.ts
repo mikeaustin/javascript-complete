@@ -31,14 +31,14 @@ interface Printable2<T> {
 }
 
 
-Number.prototype.print = function () { return this.toString(); }
-Number.prototype[foo] = function () { return this.toString(); }
+Number.prototype.print = function () { return this.toString(); };
+Number.prototype[foo] = function () { return this.toString(); };
 
 function logValue2<T extends Printable2<T>>(value: T) {
   console.log(value.print());
 }
 
-logValue2(20);
+// logValue2(20);
 
 
 
@@ -49,7 +49,7 @@ declare global {
 }
 
 interface Printable<T> {
-  print(value: T): string
+  print(value: T): string;
 }
 
 function logValue<T>(value: T, stringable: Printable<T>) {
@@ -60,6 +60,6 @@ const numberPrintable: Printable<number> = {
   print(value: number) {
     return value.toString();
   }
-}
+};;
 
-logValue(10, numberPrintable);
+// logValue(10, numberPrintable);

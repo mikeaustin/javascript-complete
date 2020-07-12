@@ -8,6 +8,7 @@ import splitAt from '../src/iterators/splitAt';
 import splitBy from '../src/iterators/splitBy';
 import splitEvery from '../src/iterators/splitEvery';
 import groupBy, { Group } from '../src/iterators/groupBy';
+import combinations from '../src/iterators/combinations';
 
 GenericIterable.prototype.map = map;
 GenericIterable.prototype.splitBy = splitBy;
@@ -38,6 +39,11 @@ test('[1, 1, 2, 2, 3].splitBy((a, b) => even(a) === even(b))', () => {
 
 
 
+console.log('>>>', Array.from(
+  combinations([1, 2, 3, 4, 5])
+));
+
+
 interface Printable<T> {
   print(value: T): string;
 }
@@ -52,4 +58,4 @@ const numberPrintable: Printable<number> = {
   }
 };
 
-logValue(10, numberPrintable);
+// logValue(10, numberPrintable);
