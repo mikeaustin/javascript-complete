@@ -11,11 +11,18 @@ export interface Stringable<T> {
 }
 
 export interface Equatable<T> {
-  equals(other: T): boolean;
+  equalTo(other: T): boolean;
+  notEqualTo(other: T): boolean;
 }
 
 export interface Orderable<T> extends Equatable<T> {
-
+  compare(a: T, b: T): boolean;
+  greaterThan(other: T): boolean;
+  greaterThanOrEaualTo(other: T): boolean;
+  lessThan(other: T): boolean;
+  lessThanOrEqualTo(other: T): boolean;
+  min(): T;
+  max(): T;
 }
 
 export abstract class GenericIterable<T> implements Iterable<T> {

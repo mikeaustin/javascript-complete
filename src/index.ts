@@ -21,6 +21,7 @@ declare global {
   interface Array<T> {
     zip(zipper?: (values: any[]) => any, iterables?: Iterable<any>[]): GenericIterable<any>;
     groupBy(grouper: (x: T) => string, iterable?: Iterable<T>): GenericIterable<Group<T>>;
+    splitAt(index: number, iterable?: Iterable<T>): GenericIterable<T[]>;
     splitBy(splitter: (a: T, b: T) => boolean, iterable?: Iterable<T>): GenericIterable<T[]>;
   }
 
@@ -46,6 +47,7 @@ String.prototype.succ = function () {
 
 declare module "./GenericIterable" {
   interface GenericIterable<T> {
+    take<T>(count: number, iterable?: Iterable<T>): GenericIterable<T>;
     map<R>(mapper: (value: T) => R, iterable?: Iterable<T>): GenericIterable<R>;
     zip(zipper?: (values: any[]) => any, iterables?: Iterable<any>[]): GenericIterable<any>;
     splitAt(index: number, iterable?: Iterable<T>): GenericIterable<T[]>;
