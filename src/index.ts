@@ -16,6 +16,7 @@ declare global {
 
   interface String {
     succ(): string;
+    append(value: string): string;
   }
 
   interface Array<T> {
@@ -23,6 +24,7 @@ declare global {
     groupBy(grouper: (x: T) => string, iterable?: Iterable<T>): GenericIterable<Group<T>>;
     splitAt(index: number, iterable?: Iterable<T>): GenericIterable<T[]>;
     splitBy(splitter: (a: T, b: T) => boolean, iterable?: Iterable<T>): GenericIterable<T[]>;
+    append<R>(value: R): T;
   }
 
   interface Map<K, V> {

@@ -25,6 +25,11 @@ export interface Orderable<T> extends Equatable<T> {
   max(): T;
 }
 
+export interface AppendArray<T> extends ArrayLike<T> {
+  append<R>(value: T): R;
+  empty(): AppendArray<T>;
+}
+
 export abstract class GenericIterable<T> implements Iterable<T> {
   abstract [Symbol.iterator](): Iterator<T>;
 }

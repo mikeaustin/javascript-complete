@@ -1,4 +1,4 @@
-import GenericIterable from '../src/GenericIterable';
+import GenericIterable, { AppendArray } from '../src/GenericIterable';
 
 import { identity, even } from '../src/standard';
 import range from '../src/generators/range';
@@ -12,40 +12,26 @@ import splitEvery from '../src/iterators/splitEvery';
 import groupBy, { Group } from '../src/iterators/groupBy';
 import combinations from '../src/iterators/combinations';
 
-GenericIterable.prototype.take = take;
-GenericIterable.prototype.map = map;
-GenericIterable.prototype.zip = zip;
-GenericIterable.prototype.splitAt = splitAt;
-GenericIterable.prototype.splitBy = splitBy;
-GenericIterable.prototype.splitEvery = splitEvery;
-GenericIterable.prototype.groupBy = groupBy;
-
-Array.prototype.zip = zip;
-Array.prototype.splitAt = splitAt;
-Array.prototype.splitBy = splitBy;
+import '../src/declarations';
 
 const boundary = <T>(
   f: (value: T) => boolean,
 ) => (a: T, b: T) => f(a) === f(b);
 
+//
 
-declare global {
-  interface Number {
-    succ(): number;
-  }
+function testAppendArray<T>(value: AppendArray<T>) {
+  let result = value.empty();
 
-  interface String {
-    succ(): string;
-  }
+  result = result.append(value[0]);
+
+  return result;
 }
 
-Number.prototype.succ = function () {
-  return this.valueOf() + 1;
-};
-
-String.prototype.succ = function () {
-  return String.fromCharCode(this.charCodeAt() + 1);
-};
+test('AppendArray', () => {
+  expect(testAppendArray('abcde')).toEqual('a');
+  expect(testAppendArray([1, 2, 3])).toEqual([1]);
+});
 
 test('range()', () => {
   expect(Array.from(

@@ -1,4 +1,4 @@
-import GenericIterable from '../GenericIterable';
+import GenericIterable, { AppendArray } from '../GenericIterable';
 
 class SplitAtIterable<T> extends GenericIterable<T[]> {
   constructor(
