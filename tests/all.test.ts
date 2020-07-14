@@ -109,6 +109,14 @@ test('groupBy()', () => {
   );
 });
 
+test('combinations()', () => {
+  expect(Array.from(
+    combinations([1, 2, 3])
+  )).toEqual(
+    [[1, 2], [1, 3], [2, 3]]
+  );
+});
+
 // console.log('>>>', Array.from(
-//   combinations([1, 2, 3, 4, 5])
+//   combine(2, [1, 2, 3])
 // ));

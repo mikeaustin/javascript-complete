@@ -3,6 +3,7 @@ import GenericIterable, { AppendArray } from '../src/GenericIterable';
 import range from '../src/generators/range';
 import repeat from '../src/generators/repeat';
 import take from '../src/iterators/take';
+import drop from '../src/iterators/drop';
 import map from '../src/iterators/map';
 import zip from '../src/iterators/zip';
 import splitAt from '../src/iterators/splitAt';
@@ -37,6 +38,7 @@ String.prototype.succ = function () {
 };
 
 GenericIterable.prototype.take = take;
+GenericIterable.prototype.drop = drop;
 GenericIterable.prototype.map = map;
 GenericIterable.prototype.zip = zip;
 GenericIterable.prototype.splitAt = splitAt;

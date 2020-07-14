@@ -50,6 +50,7 @@ String.prototype.succ = function () {
 declare module "./GenericIterable" {
   interface GenericIterable<T> {
     take<T>(count: number, iterable?: Iterable<T>): GenericIterable<T>;
+    drop<T>(count: number, iterable?: Iterable<T>): GenericIterable<T>;
     map<R>(mapper: (value: T) => R, iterable?: Iterable<T>): GenericIterable<R>;
     zip(zipper?: (values: any[]) => any, iterables?: Iterable<any>[]): GenericIterable<any>;
     splitAt(index: number, iterable?: Iterable<T>): GenericIterable<T[]>;
