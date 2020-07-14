@@ -1,6 +1,6 @@
 import GenericIterable, { AppendArray } from '../src/GenericIterable';
 
-import { identity, even } from '../src/standard';
+import { identity, reduce, even, every, some } from '../src/standard';
 import range from '../src/generators/range';
 import repeat from '../src/generators/repeat';
 import take from '../src/iterators/take';
@@ -27,6 +27,31 @@ function testAppendArray<T>(value: AppendArray<T>) {
 
   return result;
 }
+
+test('Map.fromEntries()', () => {
+  expect(
+    Map.fromEntries(new Map([['a', 1], ['b', 2]]).entries())
+  ).toEqual(
+    new Map([['a', 1], ['b', 2]])
+  );
+});
+
+test('Object.from()', () => {
+  expect(
+    Object.fromEntries([['a', 1], ['b', 2]])
+  ).toEqual(
+    { a: 1, b: 2 }
+  );
+});
+
+
+test('Object.prototype.entries()', () => {
+  expect(
+    Array.from((({ a: 1, b: 2 }).entries()))
+  ).toEqual(
+    [['a', 1], ['b', 2]]
+  );
+});
 
 test('AppendArray', () => {
   expect(testAppendArray('abcde')).toEqual('a');
@@ -120,3 +145,21 @@ test('combinations()', () => {
 // console.log('>>>', Array.from(
 //   combine(2, [1, 2, 3])
 // ));
+
+test('reduce()', () => {
+  expect(
+    reduce((a: number, n: number) => a + n, 0, [1, 2, 3, 4])
+  ).toEqual(
+    10
+  );
+});
+
+test('every()', () => {
+  expect(every(even, [2, 4, 6])).toBe(true);
+  expect(every(even, [2, 3, 6])).toBe(false);
+});
+
+test('some()', () => {
+  expect(some(even, [2, 3, 6])).toBe(true);
+  expect(every(even, [1, 3, 5])).toBe(false);
+});

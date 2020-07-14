@@ -1,4 +1,5 @@
 import GenericIterable, { AppendArray } from '../src/GenericIterable';
+import { identity, reduce, even, every, some } from '../src/standard';
 
 import range from '../src/generators/range';
 import repeat from '../src/generators/repeat';
@@ -27,7 +28,49 @@ declare global {
     append<R>(value: R): T;
     empty(): T[];
   }
+
+  interface ArrayConstructor {
+    fromEntries<K, V>(iterable: Iterable<[K, V]>): Array<V>;
+  }
+
+  interface MapConstructor {
+    fromEntries<K, V>(iterable: Iterable<[string, V]>): Map<string, V>;
+  }
+
+  interface Object {
+    // entries<K, V>(): Iterator<[string, V]>;
+    entries<K, V>(iterator?: Object): IterableIterator<[string, V]>;
+  }
 }
+
+Array.fromEntries = function <K, V>(iterable: Iterable<[K, V]>): V[] {
+  let result: V[] = [];
+
+  for (let [key, value] of iterable) {
+    result.push(value);
+  }
+
+  return result;
+};
+
+Map.fromEntries = function <K, V>(iterable: Iterable<[K, V]>) {
+  return new Map(iterable);
+};
+
+Object.defineProperty(Object, 'fromEntries', {
+  value: <K extends string | number, V>(iterable: Iterable<[K, V]>) =>
+    reduce((a, [k, v]: [K, V]) => ({ ...a, [k]: v }), {}, iterable)
+});
+
+Object.defineProperty(Object.prototype, 'entries', {
+  value: function* <V>(iterator: Object = this): IterableIterator<[string, V]> {
+    for (let key in iterator) {
+      if (this.hasOwnProperty(key)) {
+        yield [key, this[key]];
+      }
+    }
+  }
+});
 
 Number.prototype.succ = function () {
   return this.valueOf() + 1;
