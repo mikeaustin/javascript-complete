@@ -25,6 +25,7 @@ declare global {
     splitAt(index: number, iterable?: Iterable<T>): GenericIterable<T[]>;
     splitBy(splitter: (a: T, b: T) => boolean, iterable?: Iterable<T>): GenericIterable<T[]>;
     append<R>(value: R): T;
+    combinations<T>(iterable?: Iterable<T>): GenericIterable<T[]>;
   }
 
   interface Map<K, V> {
