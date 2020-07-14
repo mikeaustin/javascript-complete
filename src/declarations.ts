@@ -33,12 +33,12 @@ declare global {
     fromEntries<K, V>(iterable: Iterable<[K, V]>): Array<V>;
   }
 
-  interface MapConstructor {
-    fromEntries<K, V>(iterable: Iterable<[string, V]>): Map<string, V>;
-  }
+  // interface MapConstructor {
+  //   fromEntries<K, V>(iterable: Iterable<[string, V]>): Map<string, V>;
+  // }
 
-  interface Object {
-    entries<V>(iterator?: Object): IterableIterator<[string, V]>;
-    [Symbol.iterator]<V>(iterator?: Object): IterableIterator<[string, V]>;
-  }
+  // interface Object {
+  //   entries<V>(iterator?: Object): IterableIterator<[string, V]>;
+  //   [Symbol.iterator]<V>(iterator?: Object): IterableIterator<[string, V]>;
+  // }
 }

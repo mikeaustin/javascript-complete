@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
-    "start": "webpack && node ./dist/index.js",
-    "test": "jest --verbose"
+    "start": "npm test && webpack && node ./dist/index.js",
+    "test": "jest --verbose --no-cache"
   },
   "author": "Mike Austin <mike_ekim@yahoo.com>",
   "license": "MIT",
