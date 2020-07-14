@@ -28,29 +28,29 @@ Array.fromEntries = function <K, V>(iterable: Iterable<[K, V]>): V[] {
   return result;
 };
 
-// Map.fromEntries = function <K, V>(iterable: Iterable<[K, V]>) {
-//   return new Map(iterable);
-// };
+Map.fromEntries = function <K, V>(iterable: Iterable<[K, V]>) {
+  return new Map(iterable);
+};
 
-// Object.defineProperty(Object, 'fromEntries', {
-//   value: function <K extends string | number, V>(iterable: Iterable<[K, V]>) {
-//     return reduce((a, [k, v]: [K, V]) => ({ ...a, [k]: v }), {}, iterable);
-//   }
-// });
+Object.defineProperty(Object, 'fromEntries', {
+  value: function <K extends string | number, V>(iterable: Iterable<[K, V]>) {
+    return reduce((a, [k, v]: [K, V]) => ({ ...a, [k]: v }), {}, iterable);
+  }
+});
 
 //
 // Methods
 //
 
-// Object.defineProperty(Object.prototype, 'entries', {
-//   value: function* <V>(iterator: Object = this): IterableIterator<[string, V]> {
-//     for (let key in iterator) {
-//       if (this.hasOwnProperty(key)) {
-//         yield [key, this[key]];
-//       }
-//     }
-//   }
-// });
+Object.defineProperty(Object.prototype, 'entries', {
+  value: function* <V>(iterator: Object = this): IterableIterator<[string, V]> {
+    for (let key in iterator) {
+      if (this.hasOwnProperty(key)) {
+        yield [key, this[key]];
+      }
+    }
+  }
+});
 
 // Object.defineProperty(Object.prototype, Symbol.iterator, {
 //   value: Object.prototype.entries

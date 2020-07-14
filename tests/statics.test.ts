@@ -23,22 +23,21 @@ test('Map.fromEntries()', () => {
   );
 });
 
-// test('Map.fromEntries()', () => {
-//   expect(
-//     Map.fromEntries(new Map([['a', 1], ['b', 2]]).entries())
-//   ).toEqual(
-//     new Map([['a', 1], ['b', 2]])
-//   );
-// });
+test('Map.fromEntries()', () => {
+  expect(
+    Map.fromEntries(new Map([['a', 1], ['b', 2]]).entries())
+  ).toEqual(
+    new Map([['a', 1], ['b', 2]])
+  );
+});
 
-// test('Object.from()', () => {
-//   expect(
-//     Object.fromEntries([['a', 1], ['b', 2]])
-//   ).toEqual(
-//     { a: 1, b: 2 }
-//   );
-// });
-
+test('Object.fromEntries()', () => {
+  expect(
+    Object.fromEntries([['a', 1], ['b', 2]])
+  ).toEqual(
+    { a: 1, b: 2 }
+  );
+});
 
 // test('Object.prototype.entries()', () => {
 //   expect(
