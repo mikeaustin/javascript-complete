@@ -38,8 +38,8 @@ declare global {
   }
 
   interface Object {
-    // entries<K, V>(): Iterator<[string, V]>;
-    entries<K, V>(iterator?: Object): IterableIterator<[string, V]>;
+    entries<V>(iterator?: Object): IterableIterator<[string, V]>;
+    [Symbol.iterator]<V>(iterator?: Object): IterableIterator<[string, V]>;
   }
 }
 
@@ -58,8 +58,9 @@ Map.fromEntries = function <K, V>(iterable: Iterable<[K, V]>) {
 };
 
 Object.defineProperty(Object, 'fromEntries', {
-  value: <K extends string | number, V>(iterable: Iterable<[K, V]>) =>
-    reduce((a, [k, v]: [K, V]) => ({ ...a, [k]: v }), {}, iterable)
+  value: function <K extends string | number, V>(iterable: Iterable<[K, V]>) {
+    return reduce((a, [k, v]: [K, V]) => ({ ...a, [k]: v }), {}, iterable);
+  }
 });
 
 Object.defineProperty(Object.prototype, 'entries', {
@@ -70,6 +71,10 @@ Object.defineProperty(Object.prototype, 'entries', {
       }
     }
   }
+});
+
+Object.defineProperty(Object.prototype, Symbol.iterator, {
+  value: Object.prototype.entries
 });
 
 Number.prototype.succ = function () {
