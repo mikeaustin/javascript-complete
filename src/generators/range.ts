@@ -1,7 +1,10 @@
 import GenericIterable, { Enumerabe } from '../GenericIterable';
 
 class RangeIterable<T extends Enumerabe<T>> extends GenericIterable<T>  {
-  constructor(public from: T, public to: T) {
+  constructor(
+    public from: T,
+    public to: T
+  ) {
     super();
   }
 
