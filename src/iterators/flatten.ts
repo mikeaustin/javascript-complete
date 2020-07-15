@@ -1,9 +1,5 @@
 import GenericIterable from '../GenericIterable';
 
-// function asIterable<T>(value: T) {
-//   Symbol.iterator in value && typeof value[Symbol.iterator] === 'function';
-// }
-
 class FlattenIterable<T> extends GenericIterable<T> {
   constructor(
     private depth: number,
