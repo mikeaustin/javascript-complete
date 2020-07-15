@@ -4,6 +4,9 @@ import { identity, reduce, even, every, some } from '../src/standard';
 import '../src/polyfills';
 
 import take from '../src/iterators/take';
+import map from '../src/iterators/map';
+import flatten from '../src/iterators/flatten';
+import insertAt from '../src/iterators/insertAt';
 
 const boundary = <T>(
   f: (value: T) => boolean,
@@ -32,6 +35,12 @@ test('drop()', () => {
 });
 
 test('map()', () => {
+  expect(Array.from(
+    map((n: number) => n * n, range(1, 5))
+  )).toEqual(
+    [1, 4, 9, 16, 25]
+  );
+
   expect(Array.from(
     range(1, 5).map(n => n * n)
   )).toEqual(
@@ -101,4 +110,32 @@ test('every()', () => {
 test('some()', () => {
   expect(some(even, [2, 3, 6])).toBe(true);
   expect(every(even, [1, 3, 5])).toBe(false);
+});
+
+test('takeAt()', () => {
+  expect(Array.from(
+    insertAt(0, 10, [1, 2, 3])
+  )).toEqual(
+    [10, 1, 2, 3]
+  );
+
+  expect(Array.from(
+    insertAt(3, 10, [1, 2, 3])
+  )).toEqual(
+    [1, 2, 3, 10]
+  );
+
+  expect(Array.from(
+    insertAt(5, 10, [1, 2, 3])
+  )).toEqual(
+    [1, 2, 3, 10]
+  );
+});
+
+test('flatten()', () => {
+  expect(Array.from(
+    flatten(1, [1, [2, [3]]])
+  )).toEqual(
+    [1, 2, [3]]
+  );
 });

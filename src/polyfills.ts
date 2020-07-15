@@ -76,6 +76,7 @@ GenericIterable.prototype.groupBy = groupBy;
 Array.prototype.zip = zip;
 Array.prototype.splitAt = splitAt;
 Array.prototype.splitBy = splitBy;
+Array.prototype.groupBy = groupBy;
 Array.prototype.combinations = combinations;
 
 Array.prototype.append = function <T>(value: T) {
@@ -85,6 +86,8 @@ Array.prototype.append = function <T>(value: T) {
 Array.prototype.empty = function (): any[] {
   return [];
 };
+
+Map.prototype.map = map;
 
 String.prototype.append = function (value: string) {
   return this.concat(value);
