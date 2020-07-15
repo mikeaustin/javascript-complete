@@ -134,8 +134,14 @@ test('takeAt()', () => {
 
 test('flatten()', () => {
   expect(Array.from(
-    flatten(1, [1, [2, [3]]])
+    flatten(1, [1, [2, [3, [4]]]])
   )).toEqual(
-    [1, 2, [3]]
+    [1, 2, [3, [4]]]
+  );
+
+  expect(Array.from(
+    flatten(2, [1, [2, [3, [4]]]])
+  )).toEqual(
+    [1, 2, 3, [4]]
   );
 });

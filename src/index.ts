@@ -34,8 +34,8 @@ declare global {
 }
 
 declare global {
-  interface Iterable<T> {
-    // map<R>(mapper: (value: T) => R, iterable?: Iterable<T>): Iterable<R>;
+  interface Iterator<T> {
+    map<R>(mapper: (value: T) => R, iterable?: Iterable<T>): Iterable<R>;
     // groupBy(grouper: (x: T) => string, iterable?: Iterable<T>): Iterable<Group<T>>;
   }
 }
@@ -44,3 +44,13 @@ declare global {
 // console.log('>>>', [1, 2, 3].entries().constructor.prototype);
 
 // Object.getPrototypeOf(function* () { }).constructor.prototype.map = map;
+
+function* foo() {
+  yield 10;
+}
+
+Object.getPrototypeOf(function* () { }).prototype.map = map;
+Object.getPrototypeOf([].entries()).map = map;
+
+console.log(Array.from([1, 2, 3].values().map((x: number) => x * x)));
+console.log(Array.from(foo().map((x: number) => x * x)));
