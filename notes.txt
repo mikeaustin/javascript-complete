@@ -1,0 +1,97 @@
+
+merge
+
+insertAt(index, value)
+prepend(value)
+append(value)
+update(value => value)
+remove(key)
+set(key, value)
+get(key)
+find(value)
+indexOf(value)
+
+
+Collection
+
+reduce(a, c => value), map(c => value), filter(c => value)
+set(key), get(key), has(key)
+every(pred), some(pred), includes(value), find(func)
+
+Set
+set(key), get(key), has(key)
+union(sets)
+
+Map
+set(key, value), get(key), has(key), remove(key)
+union(maps)
+
+Array
+set(index, value), get(index), has(index), remove(index)
+concat(other), find(value), includes(value)
+join(string)
+
+
+Sequence
+insert(key, value), reverse(), slice(from, to), sort(func), flatten(depth), indexOf(value)
+
+
+indexOf, keyOf
+
+
+new Map([['a', 1]]).entries().sort?
+
+new Map([['a', 1]]).map(([k, v]) => `${k}: ${v}`)
+
+into(new Map(), [['a', 1]])
+
+
+
+
+Set function on array?
+Iterators loose context
+
+map (++ "x") (fromList [(5,"a"), (3,"b")]) == fromList [(3, "bx"), (5, "ax")]
+
+{ 5: 'a', 5: 'a' }.map(x => str ++ 'x').insert?
+
+GenericIterable
+
+
+SequenceIterable
+
+  take, drop, flatten, groupBy, head, insertAt, splitAt, splitBy, splitEvery, take, zip
+
+DictionaryIterable
+
+  set, has, get, remove
+
+
+Sometimes you want to return a new collection, sometimes you want to return an enumerable
+
+new Map([['a', 1]]).map(v => v * v)
+
+
+dynamic, static | sequence, associative, indexable, bidirectional
+
+vector		map
+
+
+
+trait Map[K, +V] extends Iterable[(K, V)]
+  with MapOps[K, V, Map, Map[K, V]]
+  with MapFactoryDefaults[K, V, Map, Iterable]
+  with Equals
+
+trait Iterable[+A] extends IterableOnce[A]
+  with IterableOps[A, Iterable, Iterable[A]]
+  with IterableFactoryDefaults[A, Iterable]
+
+trait MapOps[K, +V, +CC[_, _] <: IterableOps[_, collection.AnyConstr, _], +C] extends IterableOps[(K, V), Iterable, C]
+  with PartialFunction[K, V]
+
+  get(key: T)
+  drop(n: Int): C
+
+
+Storage vs operations
