@@ -50,6 +50,10 @@ class CombinationsIterable<T> extends GenericIterable<T[]> {
   }
 
   *[Symbol.iterator](): Iterator<T[]> {
+    if (!this.iterable) {
+      return;
+    }
+
     let n = 0;
 
     for (let value of this.iterable) {

@@ -9,12 +9,15 @@ class SplitByIterable<T> extends GenericIterable<T[]> {
   }
 
   *[Symbol.iterator](): Iterator<T[]> {
+    if (!this.iterable) {
+      return;
+    }
+
     let result = [];
-    let prev;
-    let n = 0;
+    let previousValue;
 
     for (let value of this.iterable) {
-      if (n++ > 0 && !this.splitter(prev, value)) {
+      if (previousValue && !this.splitter(previousValue, value)) {
         yield result;
 
         result = [];
@@ -22,7 +25,7 @@ class SplitByIterable<T> extends GenericIterable<T[]> {
 
       result.push(value);
 
-      prev = value;
+      previousValue = value;
     }
 
     if (result.length !== 0) {

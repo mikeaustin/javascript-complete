@@ -8,6 +8,7 @@
     "allowJs": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
+    "strictNullChecks": true,
     "lib": [
       "esnext",
       "dom",

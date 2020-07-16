@@ -9,6 +9,10 @@ class SplitEveryIterable<T> extends GenericIterable<T[]> {
   }
 
   *[Symbol.iterator](): Iterator<T[]> {
+    if (!this.iterable) {
+      return;
+    }
+
     let result = [];
 
     for (let value of this.iterable) {

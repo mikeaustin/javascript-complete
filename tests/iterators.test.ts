@@ -36,6 +36,12 @@ test('drop()', () => {
 
 test('map()', () => {
   expect(Array.from(
+    map((n: number) => n * n)(range(1, 5))
+  )).toEqual(
+    [1, 4, 9, 16, 25]
+  );
+
+  expect(Array.from(
     map((n: number) => n * n, range(1, 5))
   )).toEqual(
     [1, 4, 9, 16, 25]

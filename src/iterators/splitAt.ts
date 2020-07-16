@@ -9,6 +9,10 @@ class SplitAtIterable<T> extends GenericIterable<T[]> {
   }
 
   *[Symbol.iterator](): Iterator<T[]> {
+    if (!this.iterable) {
+      return;
+    }
+
     let result = [];
     let n = 0;
 
