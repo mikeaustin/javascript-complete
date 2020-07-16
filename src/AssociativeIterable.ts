@@ -4,3 +4,25 @@ interface AssociativeIterable<T> extends Iterable<T> {
 }
 
 export default AssociativeIterable;
+
+/*
+
+s = new Set("aabbc")
+Set(3) {"a", "b", "c"}
+
+class StringSet {
+  str: string;
+  set: Set;
+
+  constructor(str: string) {
+    this.str = str;
+    this.set = new Set(str);
+  }
+}
+
+s = new StringSet("aabbc")
+
+s[2] === "b"
+s.has("b")
+
+*/
