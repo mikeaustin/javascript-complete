@@ -34,4 +34,8 @@ export abstract class GenericIterable<T> implements Iterable<T> {
   abstract [Symbol.iterator](): Iterator<T>;
 }
 
+interface GenericIterable2<T> extends Iterable<T> {
+  [Symbol.iterator](): Iterator<T>;
+}
+
 export default GenericIterable;
