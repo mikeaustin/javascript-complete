@@ -3,6 +3,7 @@ import GenericIterable from './GenericIterable';
 import take from '../src/iterators/take';
 import drop from '../src/iterators/drop';
 import map from '../src/iterators/map';
+import filter from '../src/iterators/filter';
 import zip from '../src/iterators/zip';
 import splitAt from '../src/iterators/splitAt';
 import splitBy from '../src/iterators/splitBy';
@@ -66,6 +67,7 @@ String.prototype.succ = function () {
 GenericIterable.prototype.take = take;
 GenericIterable.prototype.drop = drop;
 GenericIterable.prototype.map = map;
+GenericIterable.prototype.filter = filter;
 GenericIterable.prototype.zip = zip;
 GenericIterable.prototype.splitAt = splitAt;
 GenericIterable.prototype.splitBy = splitBy;

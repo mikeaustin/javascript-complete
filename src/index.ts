@@ -1,6 +1,8 @@
 import GenericIterable from './GenericIterable';
 
 import { identity, even } from './standard';
+
+import head from './iterators/head';
 import range from './generators/range';
 import map from './iterators/map';
 import zip from './iterators/zip';
@@ -54,3 +56,10 @@ Object.getPrototypeOf([].entries()).map = map;
 
 console.log(Array.from([1, 2, 3].values().map((x: number) => x * x)));
 console.log(Array.from(foo().map((x: number) => x * x)));
+
+let x = head([1]);
+// x.toString();
+
+const capitalize = (str: string) => str.slice(0, 1).toUpperCase() + str.slice(1);
+
+console.log(capitalize('hello'));

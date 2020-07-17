@@ -3,14 +3,30 @@ import { identity, even } from '../src/standard';
 
 import '../src/polyfills';
 
+import head from '../src/iterators/head';
 import take from '../src/iterators/take';
 import map from '../src/iterators/map';
+import filter from '../src/iterators/filter';
 import flatten from '../src/iterators/flatten';
 import insertAt from '../src/iterators/insertAt';
 
 const boundary = <T>(
   f: (value: T) => boolean,
 ) => (a: T, b: T) => f(a) === f(b);
+
+test('head()', () => {
+  expect(
+    head([1, 2, 3])
+  ).toEqual(
+    1
+  );
+
+  expect(
+    head([])
+  ).toEqual(
+    undefined
+  );
+});
 
 test('take()', () => {
   expect(Array.from(
@@ -51,6 +67,20 @@ test('map()', () => {
     range(1, 5).map(n => n * n)
   )).toEqual(
     [1, 4, 9, 16, 25]
+  );
+});
+
+test('filter()', () => {
+  expect(Array.from(
+    filter((n: number) => even(n), range(1, 10))
+  )).toEqual(
+    [2, 4, 6, 8, 10]
+  );
+
+  expect(Array.from(
+    range(1, 10).filter(n => even(n))
+  )).toEqual(
+    [2, 4, 6, 8, 10]
   );
 });
 

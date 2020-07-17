@@ -1,4 +1,5 @@
-import GenericIterable, { Enumerabe } from '../GenericIterable';
+import GenericIterable from '../GenericIterable';
+import Enumerabe from '../interfaces/Enumerable';
 
 class RangeIterable<T extends Enumerabe<T>> extends GenericIterable<T>  {
   constructor(

@@ -7,6 +7,7 @@ declare module "./GenericIterable" {
     take<T>(count: number, iterable?: Iterable<T>): GenericIterable<T>;
     drop<T>(count: number, iterable?: Iterable<T>): GenericIterable<T>;
     map<R>(mapper: (value: T) => R, iterable?: Iterable<T>): GenericIterable<R>;
+    filter(mapper: (value: T) => boolean, iterable?: Iterable<T>): GenericIterable<T>;
     zip(zipper?: (values: any[]) => any, iterables?: Iterable<any>[]): GenericIterable<any>;
     splitAt(index: number, iterable?: Iterable<T>): GenericIterable<T[]>;
     splitBy(splitter: (a: T, b: T) => boolean, iterable?: Iterable<T>): GenericIterable<T[]>;

@@ -2,8 +2,12 @@ import GenericIterable from '../GenericIterable';
 
 function head<T>(
   iterable: Iterable<T> = this
-): T {
-  return iterable[Symbol.iterator]().next().value;
+): T | undefined {
+  for (let value of iterable) {
+    return value;
+  }
+
+  return undefined;
 }
 
 export default head;

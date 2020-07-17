@@ -1,7 +1,3 @@
-export interface Enumerabe<T> {
-  succ(): T;
-}
-
 export interface Numerable<T> {
   add(other: T): T;
 }
