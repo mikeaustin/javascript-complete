@@ -1,7 +1,5 @@
 import GenericIterable from './GenericIterable';
-import { identity, reduce, even, every, some } from '../src/standard';
-import range from '../src/generators/range';
-import repeat from '../src/generators/repeat';
+
 import take from '../src/iterators/take';
 import drop from '../src/iterators/drop';
 import map from '../src/iterators/map';
@@ -10,6 +8,7 @@ import splitAt from '../src/iterators/splitAt';
 import splitBy from '../src/iterators/splitBy';
 import splitEvery from '../src/iterators/splitEvery';
 import groupBy, { Group } from '../src/iterators/groupBy';
+import reduce from '../src/aggregators/reduce';
 import combinations from '../src/iterators/combinations';
 
 import './declarations';
@@ -72,6 +71,7 @@ GenericIterable.prototype.splitAt = splitAt;
 GenericIterable.prototype.splitBy = splitBy;
 GenericIterable.prototype.splitEvery = splitEvery;
 GenericIterable.prototype.groupBy = groupBy;
+GenericIterable.prototype.reduce = reduce;
 
 Array.prototype.zip = zip;
 Array.prototype.splitAt = splitAt;

@@ -1,17 +1,6 @@
 import GenericIterable, { AppendArray } from '../src/GenericIterable';
-import { identity, reduce, even, every, some } from '../src/standard';
 
-import range from '../src/generators/range';
-import repeat from '../src/generators/repeat';
-import take from '../src/iterators/take';
-import drop from '../src/iterators/drop';
-import map from '../src/iterators/map';
-import zip from '../src/iterators/zip';
-import splitAt from '../src/iterators/splitAt';
-import splitBy from '../src/iterators/splitBy';
-import splitEvery from '../src/iterators/splitEvery';
-import groupBy, { Group } from '../src/iterators/groupBy';
-import combinations from '../src/iterators/combinations';
+import { Group } from '../src/iterators/groupBy';
 
 declare module "./GenericIterable" {
   interface GenericIterable<T> {
@@ -23,6 +12,7 @@ declare module "./GenericIterable" {
     splitBy(splitter: (a: T, b: T) => boolean, iterable?: Iterable<T>): GenericIterable<T[]>;
     splitEvery(count: number, iterable?: Iterable<T>): GenericIterable<T[]>;
     groupBy(grouper: (x: T) => string, iterable?: Iterable<T>): GenericIterable<Group<T>>;
+    reduce<R>(reducer: (acc: R, value: T) => R, initial: R, iterable?: Iterable<T>): R;
   }
 }
 

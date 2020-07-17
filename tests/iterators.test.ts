@@ -1,5 +1,5 @@
 import range from '../src/generators/range';
-import { identity, reduce, even, every, some } from '../src/standard';
+import { identity, even } from '../src/standard';
 
 import '../src/polyfills';
 
@@ -98,24 +98,6 @@ test('combinations()', () => {
   )).toEqual(
     [[1, 2], [1, 3], [2, 3]]
   );
-});
-
-test('reduce()', () => {
-  expect(
-    reduce((a: number, n: number) => a + n, 0, [1, 2, 3, 4])
-  ).toEqual(
-    10
-  );
-});
-
-test('every()', () => {
-  expect(every(even, [2, 4, 6])).toBe(true);
-  expect(every(even, [2, 3, 6])).toBe(false);
-});
-
-test('some()', () => {
-  expect(some(even, [2, 3, 6])).toBe(true);
-  expect(every(even, [1, 3, 5])).toBe(false);
 });
 
 test('takeAt()', () => {
